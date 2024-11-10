@@ -22,7 +22,7 @@ public class AuthorController {
     @Operation(summary = "Get all authors")
     @GetMapping
     public ResponseEntity<List<AuthorResponseDto>> getAll() {
-        return ResponseEntity.ok(authorService.getAll());
+        return ResponseEntity.ok(authorService.getAll().stream().map(responseMapper::map).toList());
     }
 
     @Operation(summary = "Get author")
