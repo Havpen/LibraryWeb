@@ -1,0 +1,35 @@
+server:
+  forward-headers-strategy: framework
+  error:
+    include-stacktrace: always
+
+spring:
+  main:
+    allow-circular-references: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/library-manager
+    username: root
+    password: supersecretpassword$
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      show_sql: true
+  server:
+    error:
+      include-reason: always
+      include-binding-errors: always
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+user.cache: true
+
+cors.allowed-origins: '*'
