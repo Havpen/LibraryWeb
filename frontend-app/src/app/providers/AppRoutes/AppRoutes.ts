@@ -15,6 +15,14 @@ export class AppRoutes {
 	static getBooks() {
 		return getRoute(AppPages.books);
 	}
+	
+	static getReaders() {
+		return getRoute(AppPages.readers);
+	}
+	
+	static getReader(id: number) {
+		return getRoute(AppPages.readerEditor, { id });
+	}
 }
 
 function getRoute(name: RouteRecordName, params: RouteParamsRaw = {}, queryParams: RouteQueryAndHash = {}): RouteLocationNamedRaw {
