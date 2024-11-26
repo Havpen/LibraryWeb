@@ -16,14 +16,14 @@ public class BookInstanceService {
     private final BookRepository bookRepository;
 
     public BookInstance create(BookInstanceRequestDto requestDto){
-        Book book = bookRepository.findById(requestDto.getId()).orElseThrow(EntityNotFoundException::new);
+        Book book = bookRepository.findById(requestDto.getBook().getId()).orElseThrow(EntityNotFoundException::new);
         BookInstance instance = BookInstance.builder().bookId(book).build();
         return instanceRepository.save(instance);
     }
 
     public BookInstance update(Integer id, BookInstanceRequestDto requestDto){
         BookInstance instance = instanceRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        Book book = bookRepository.findById(requestDto.getId()).orElseThrow(EntityNotFoundException::new);
+        Book book = bookRepository.findById(requestDto.getBook().getId()).orElseThrow(EntityNotFoundException::new);
         instance.setBookId(book);
         return instanceRepository.save(instance);
     }
