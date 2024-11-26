@@ -27,7 +27,7 @@ public class ReaderController {
 
     @Operation(summary = "Get reader")
     @GetMapping("/{id}")
-    public ResponseEntity<ReaderResponseDto> getById(@RequestParam("id") Integer id){
+    public ResponseEntity<ReaderResponseDto> getById(@PathVariable Integer id){
         return ResponseEntity.ok(responseMapper.map(readerService.getById(id)));
     }
 
@@ -40,14 +40,14 @@ public class ReaderController {
 
     @Operation(summary = "Update reader")
     @PutMapping("/{id}")
-    public ResponseEntity<ReaderResponseDto> update(@RequestParam("id") Integer id, @RequestBody ReaderRequestDto readerRequestDto){
+    public ResponseEntity<ReaderResponseDto> update(@PathVariable Integer id, @RequestBody ReaderRequestDto readerRequestDto){
         Reader reader = readerService.update(id, readerRequestDto);
         return ResponseEntity.ok(responseMapper.map(reader));
     }
 
     @Operation(summary = "Delete reader")
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@RequestParam("id") Integer id){
+    public ResponseEntity<?> delete(@PathVariable Integer id){
         readerService.delete(id);
         return ResponseEntity.noContent().build();
     }

@@ -1,8 +1,5 @@
 package com.alisievich.genre.controller;
 
-import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import com.alisievich.genre.dto.GenreRequestDto;
 import com.alisievich.genre.dto.GenreResponseDto;
 import com.alisievich.genre.mapper.GenreMapper;
