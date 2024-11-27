@@ -4,7 +4,7 @@ export const routeName: string = 'Books';
 
 export const route: RouteRecordRaw = {
 	name: routeName,
-	path: '/',
+	path: '/books',
 	component: () => import('@/pages/BooksPage.vue'),
 	children: [],
 }

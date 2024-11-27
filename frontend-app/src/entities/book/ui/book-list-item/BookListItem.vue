@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { deleteReader, Reader } from '@/entities/reader'
+import { deleteBook, Book } from '@/entities/book'
+import { AppRoutes } from '@/app/providers'
 
 const props = defineProps<{
-	reader: Reader;
+	book: Book;
 }>();
 
 const emit = defineEmits<{
@@ -10,21 +11,22 @@ const emit = defineEmits<{
 }>();
 
 async function deleteSelf() {
-	await deleteReader(props.reader.id);
+	await deleteBook(props.book.id);
 	emit('delete');
 }
 </script>
 
 <template>
-	<div class="reader-list-item">
+	<div class="book-list-item">
 		<div class="primary-info">
-			<div>{{ reader.cardNumber }}</div>
-			<div>{{ reader.name }}</div>
-			<div>{{ reader.phone }}</div>
-			<div>{{ reader.email }}</div>
+			<div>{{ book.title }}</div>
+			<div>{{ book.genre.name }}</div>
+			<div>{{ book.publisher.name }}</div>
+			<div>{{ book.year }}</div>
+			<div>{{ book.language }}</div>
 		</div>
 		
-		<router-link :to="`/readers/${reader.id}`">
+		<router-link :to="AppRoutes.getBookEditor(book.id)">
 			<a-button>Edit</a-button>
 		</router-link>
 		
@@ -33,7 +35,7 @@ async function deleteSelf() {
 </template>
 
 <style scoped>
-.reader-list-item
+.book-list-item
 {
 	display: flex;
 	flex-direction: row;
@@ -44,7 +46,7 @@ async function deleteSelf() {
 	{
 		flex-grow: 1;
 		display: grid;
-		grid-template-columns: max-content 1fr 1fr 1fr 1fr;
+		grid-template-columns: 1fr 1fr 1fr auto auto;
 		column-gap: 10px;
 	}
 }

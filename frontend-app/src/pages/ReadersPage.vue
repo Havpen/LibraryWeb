@@ -21,7 +21,7 @@ function deleteItem(id: number) {
 </script>
 
 <template>
-	<div>
+	<div class="readers-page">
 		<h1>Readers</h1>
 		
 		<a-skeleton :loading="loadingReaders" active avatar></a-skeleton>
@@ -35,5 +35,16 @@ function deleteItem(id: number) {
 </template>
 
 <style scoped>
-
+.readers-page
+{
+	width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	padding: 10px 20px;
+	background: #f6f6f6;
+	border-radius: 5px;
+	border: 1px solid #ddd;
+}
 </style>

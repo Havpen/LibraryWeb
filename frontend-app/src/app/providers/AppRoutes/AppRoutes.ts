@@ -8,7 +8,7 @@ export class AppRoutes {
 		return getRoute(AppPages.home);
 	}
 	
-	static getBookEditor(id: string) {
+	static getBookEditor(id: number) {
 		return getRoute(AppPages.bookEditor, { id });
 	}
 	

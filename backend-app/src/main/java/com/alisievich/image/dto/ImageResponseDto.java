@@ -9,5 +9,4 @@ import lombok.*;
 @NoArgsConstructor
 public class ImageResponseDto {
     private Integer id;
-    private String filename;
 }

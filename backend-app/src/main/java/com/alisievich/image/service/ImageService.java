@@ -1,30 +1,66 @@
 package com.alisievich.image.service;
 
-import com.alisievich.common.service.CrudService;
-import com.alisievich.image.dto.ImageRequestDto;
+import com.alisievich.exception.GenericErrorException;
 import com.alisievich.image.model.Image;
 import com.alisievich.image.repository.ImageRepository;
-import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.EntityExistsException;
+import jakarta.servlet.ServletContext;
+import lombok.AllArgsConstructor;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.UUID;
 
 @Service
-public class ImageService extends CrudService<Image, Integer> {
+@AllArgsConstructor
+public class ImageService {
+    private static final String UPLOAD_DIR = "/uploads";
+
     private final ImageRepository imageRepository;
+    private final ServletContext servletContext;
 
-    public ImageService(ImageRepository imageRepository){
-        super(imageRepository);
+    public Resource download(Integer imageId) {
+        Image image = imageRepository.findById(imageId).orElseThrow(EntityExistsException::new);
 
-        this.imageRepository = imageRepository;
+        File file = new File(servletContext.getRealPath(UPLOAD_DIR) + File.separator + image.getFilename());
+        return new FileSystemResource(file);
     }
 
-    public Image create(ImageRequestDto requestDto){
-        Image image = Image.builder().filename(requestDto.getFilename()).build();
-        return save(image);
-    }
+    public Image upload(MultipartFile file) {
+        // Create the uploads directory if it doesn't exist
+        File directory = new File(servletContext.getRealPath(UPLOAD_DIR));
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
 
-    public Image update(Integer id, ImageRequestDto requestDto){
-        Image image = imageRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        image.setFilename(requestDto.getFilename());
-        return save(image);
+        // Create the file on the server
+        String extension = "";
+        String originalFilename = file.getOriginalFilename();
+        if (originalFilename != null) {
+            int extensionPos = originalFilename.lastIndexOf(".");
+            if (extensionPos != -1) {
+                extension = originalFilename.substring(extensionPos + 1);
+            }
+        }
+
+        String filename = UUID.randomUUID() + "." + extension;
+        File serverFile = new File(directory.getAbsolutePath() + File.separator + filename);
+
+        try {
+            file.transferTo(serverFile);
+        } catch (IOException ex) {
+            throw new GenericErrorException("Failed to save image on disk! Error: " + ex.getMessage());
+        }
+
+        Image image = Image.builder()
+                .filename(filename)
+                .build();
+        return imageRepository.save(image);
     }
 }

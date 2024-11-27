@@ -6,6 +6,7 @@ import { AppRoutes } from '@/app/providers'
 	<div class="navbar">
 		<router-link :to="AppRoutes.getHome()">Home</router-link>
 		<router-link :to="AppRoutes.getBooks()">Books</router-link>
+		<router-link :to="AppRoutes.getReaders()">Readers</router-link>
 	</div>
 </template>
 
