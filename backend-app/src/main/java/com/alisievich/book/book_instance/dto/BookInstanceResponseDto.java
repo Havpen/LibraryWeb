@@ -1,7 +1,7 @@
 package com.alisievich.book.book_instance.dto;
 
+import com.alisievich.book.dto.BookResponseDto;
 import lombok.*;
-import com.alisievich.book.model.Book;
 
 @Setter
 @Getter
@@ -10,6 +10,6 @@ import com.alisievich.book.model.Book;
 @NoArgsConstructor
 public class BookInstanceResponseDto {
     private Integer id;
-    private Book bookId;
+    private BookResponseDto book;
     private String barcode;
 }

@@ -5,7 +5,6 @@ import com.alisievich.reader.dto.ReaderRequestDto;
 import com.alisievich.reader.model.Reader;
 import com.alisievich.reader.repository.ReaderRepository;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service

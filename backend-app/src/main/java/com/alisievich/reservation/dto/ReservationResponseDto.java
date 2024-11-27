@@ -1,7 +1,6 @@
 package com.alisievich.reservation.dto;
 
 import com.alisievich.book.book_instance.dto.BookInstanceResponseDto;
-import com.alisievich.book.book_instance.model.BookInstance;
 import lombok.*;
 
 import java.time.LocalDate;

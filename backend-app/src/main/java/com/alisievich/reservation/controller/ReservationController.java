@@ -27,7 +27,7 @@ public class ReservationController {
 
     @Operation(summary = "Get reservation")
     @GetMapping("/{id}")
-    public ResponseEntity<ReservationResponseDto> getById(@RequestParam("id") Integer id){
+    public ResponseEntity<ReservationResponseDto> getById(@PathVariable Integer id){
         return ResponseEntity.ok(responseMapper.map(reservationService.getById(id)));
     }
 
@@ -40,14 +40,14 @@ public class ReservationController {
 
     @Operation(summary = "Update reservation")
     @PutMapping("/{id}")
-    public ResponseEntity<ReservationResponseDto> update(@RequestParam("id") Integer id, @RequestBody ReservationRequestDto reservationRequestDto){
+    public ResponseEntity<ReservationResponseDto> update(@PathVariable Integer id, @RequestBody ReservationRequestDto reservationRequestDto){
         Reservation reservation = reservationService.update(id, reservationRequestDto);
         return ResponseEntity.ok(responseMapper.map(reservation));
     }
 
     @Operation(summary = "Delete reservation")
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@RequestParam("id") Integer id){
+    public ResponseEntity<?> delete(@PathVariable Integer id){
         reservationService.delete(id);
         return ResponseEntity.noContent().build();
     }

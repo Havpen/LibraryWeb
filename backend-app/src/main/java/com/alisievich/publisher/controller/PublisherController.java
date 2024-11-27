@@ -27,7 +27,7 @@ public class PublisherController {
 
     @Operation(summary = "Get publisher")
     @GetMapping("/{id}")
-    public ResponseEntity<PublisherResponseDto> getById(@RequestParam("id") Integer id){
+    public ResponseEntity<PublisherResponseDto> getById(@PathVariable Integer id){
         return ResponseEntity.ok(responseMapper.map(publisherService.getById(id)));
     }
 
@@ -40,14 +40,14 @@ public class PublisherController {
 
     @Operation(summary = "Update image")
     @PutMapping("/{id}")
-    public ResponseEntity<PublisherResponseDto> update(@RequestParam Integer id, @RequestBody PublisherRequestDto publisherRequestDto){
+    public ResponseEntity<PublisherResponseDto> update(@PathVariable Integer id, @RequestBody PublisherRequestDto publisherRequestDto){
         Publisher publisher = publisherService.update(id, publisherRequestDto);
         return ResponseEntity.ok(responseMapper.map(publisher));
     }
 
     @Operation(summary = "Delete image")
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@RequestParam("id") Integer id){
+    public ResponseEntity<?> delete(@PathVariable Integer id){
         publisherService.delete(id);
         return ResponseEntity.noContent().build();
     }

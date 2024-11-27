@@ -26,7 +26,7 @@ public class IssueController {
 
     @Operation(summary = "Get issue")
     @GetMapping("/{id}")
-    public ResponseEntity<IssueResponseDto> getById(@RequestParam("id") Integer id){
+    public ResponseEntity<IssueResponseDto> getById(@PathVariable Integer id){
         return ResponseEntity.ok(responseMapper.map(issueService.getById(id)));
     }
 
@@ -39,14 +39,14 @@ public class IssueController {
 
     @Operation(summary = "Update issue")
     @PutMapping("/{id}")
-    public ResponseEntity<IssueResponseDto> update(@RequestParam("id") Integer id, @RequestBody IssueRequestDto issueRequestDto){
+    public ResponseEntity<IssueResponseDto> update(@PathVariable Integer id, @RequestBody IssueRequestDto issueRequestDto){
         Issue issueModel = issueService.update(id, issueRequestDto);
         return ResponseEntity.ok(responseMapper.map(issueModel));
     }
 
     @Operation(summary = "Delete issue")
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@RequestParam("id") Integer id){
+    public ResponseEntity<?> delete(@PathVariable Integer id){
         issueService.delete(id);
         return ResponseEntity.noContent().build();
     }

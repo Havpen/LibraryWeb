@@ -27,7 +27,7 @@ public class GenreController {
 
     @Operation(summary = "Get genre")
     @GetMapping("/{id}")
-    public ResponseEntity<GenreResponseDto> getById(@RequestParam("id") Integer id){
+    public ResponseEntity<GenreResponseDto> getById(@PathVariable Integer id){
         return ResponseEntity.ok(responseMapper.map(genreService.getById(id)));
     }
 
@@ -40,14 +40,14 @@ public class GenreController {
 
     @Operation(summary = "Update genre")
     @PutMapping("/{id}")
-    public ResponseEntity<GenreResponseDto> update(@RequestParam("id") Integer id, @RequestBody GenreRequestDto genreRequestDto){
+    public ResponseEntity<GenreResponseDto> update(@PathVariable Integer id, @RequestBody GenreRequestDto genreRequestDto){
         Genre genre = genreService.update(id, genreRequestDto);
         return ResponseEntity.ok(responseMapper.map(genre));
     }
 
     @Operation(summary = "Delete author")
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@RequestParam("id") Integer id){
+    public ResponseEntity<?> delete(@PathVariable Integer id){
         genreService.delete(id);
         return  ResponseEntity.noContent().build();
     }

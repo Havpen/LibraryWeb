@@ -22,7 +22,7 @@ public class BookInstance {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id")
-    private Book bookId;
+    private Book book;
 
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)

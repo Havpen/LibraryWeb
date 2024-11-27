@@ -1,6 +1,6 @@
 package com.alisievich.book.book_instance.dto;
-import com.alisievich.book.dto.BookIdDto;
 
+import com.alisievich.book.dto.BookRequestDto;
 import lombok.*;
 
 @Setter
@@ -10,6 +10,6 @@ import lombok.*;
 @NoArgsConstructor
 public class BookInstanceRequestDto {
     private Integer id;
-    private BookIdDto book;
+    private BookRequestDto book;
     private String barcode;
 }
