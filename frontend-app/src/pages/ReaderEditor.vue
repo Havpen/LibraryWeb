@@ -1,27 +1,14 @@
 <script setup lang="ts">
-import { createReader, getReader, Reader, updateReader } from '@/entities/reader'
-import { computed, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { createReader, getReader, Reader, updateReader, deleteReader } from '@/entities/reader'
+import { useRouter } from 'vue-router'
 import moment from 'moment'
 import { AppRoutes } from '@/app/providers'
+import { useEntityCRUDPage } from '@/shared/useEntityEditorPage'
 
-const reader = ref<Reader | null>(null);
 const router = useRouter();
 
-const readerId = computed(() => {
-	const idRaw = useRoute().params.id as string;
-	if (idRaw != 'new') {
-		return parseInt(idRaw);
-	}
-	
-	return null;
-});
-
-if (readerId.value !== null) {
-	getReader(readerId.value)
-		.then((_reader) => reader.value = _reader);
-} else {
-	reader.value = {
+function createBlank(): Reader {
+	return {
 		id: 0,
 		name: '',
 		birthday: moment(),
@@ -30,23 +17,26 @@ if (readerId.value !== null) {
 		email: '',
 		phone: '',
 		registrationDate: moment(),
-	}
+	};
 }
 
-async function save() {
-	if (reader.value) {
-		if (readerId.value === null) {
-			reader.value = await createReader(reader.value);
-			await router.push(AppRoutes.getReader(reader.value.id));
-		} else {
-			reader.value = await updateReader(readerId.value, reader.value);
-		}
-	}
-}
+const {
+	entity: reader,
+	saveEntityData: save,
+} = useEntityCRUDPage<Reader>(
+	createBlank,
+	async (reader: Reader) => {
+		const result = await createReader(reader);
+		await router.push(AppRoutes.getReader(reader.id));
+		return result;
+	},
+	getReader,
+	async (reader: Reader) => { return await updateReader(reader.id, reader); },
+	deleteReader);
 </script>
 
 <template>
-	<div>
+	<div class="reader-editor">
 		<h1>Reader Profile</h1>
 		
 		<div class="reader-grid" v-if="reader">

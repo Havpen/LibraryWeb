@@ -6,8 +6,8 @@ export type Book = {
 	title: string;
 	year: number;
 	language: string;
-	genre: Genre;
-	publisher: Publisher;
+	genre: Genre | null;
+	publisher: Publisher | null;
 }
 
 export type BookRequestDTO = {
