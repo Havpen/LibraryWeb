@@ -3,6 +3,7 @@ package com.alisievich.image.service;
 import com.alisievich.exception.GenericErrorException;
 import com.alisievich.image.model.Image;
 import com.alisievich.image.repository.ImageRepository;
+import com.alisievich.image.validator.ImageValidator;
 import jakarta.persistence.EntityExistsException;
 import jakarta.servlet.ServletContext;
 import lombok.AllArgsConstructor;
@@ -24,11 +25,13 @@ public class ImageService {
 
     private final ImageRepository imageRepository;
     private final ServletContext servletContext;
+    private final ImageValidator imageValidator;
 
     public Resource download(Integer imageId) {
         Image image = imageRepository.findById(imageId).orElseThrow(EntityExistsException::new);
 
         File file = new File(servletContext.getRealPath(UPLOAD_DIR) + File.separator + image.getFilename());
+        imageValidator.validate(image);
         return new FileSystemResource(file);
     }
 
@@ -61,6 +64,7 @@ public class ImageService {
         Image image = Image.builder()
                 .filename(filename)
                 .build();
+        imageValidator.validate(image);
         return imageRepository.save(image);
     }
 }

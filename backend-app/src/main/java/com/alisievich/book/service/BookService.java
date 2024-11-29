@@ -6,6 +6,7 @@ import com.alisievich.book.mapper.BookDtoMapper;
 import com.alisievich.book.mapper.BookMapper;
 import com.alisievich.book.model.Book;
 import com.alisievich.book.repository.BookRepository;
+import com.alisievich.book.validator.BookValidator;
 import com.alisievich.genre.model.Genre;
 import com.alisievich.genre.repository.GenreRepository;
 import com.alisievich.publisher.model.Publisher;
@@ -28,6 +29,7 @@ public class BookService {
     private final BookMapper bookMapper;
     private final GenreRepository genreRepository;
     private final PublisherRepository publisherRepository;
+    private final BookValidator bookValidator;
 
     public List<BookDto> getAll(){
         return IterableUtils.toList(bookRepository.findAll()).stream().map(bookDtoMapper::map)
@@ -40,6 +42,7 @@ public class BookService {
 
     public Book create(BookRequestDto requestDto){
         Book book = bookMapper.map(requestDto);
+        bookValidator.validate(book);
         return bookRepository.save(book);
     }
 
@@ -56,7 +59,7 @@ public class BookService {
         book.setLanguage(requestDto.getLanguage());
 
         // TODO: Add authors update
-
+        bookValidator.validate(book);
         return bookRepository.save(book);
     }
 

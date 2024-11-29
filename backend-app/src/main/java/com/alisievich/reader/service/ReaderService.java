@@ -4,20 +4,23 @@ import com.alisievich.common.service.CrudService;
 import com.alisievich.reader.dto.ReaderRequestDto;
 import com.alisievich.reader.model.Reader;
 import com.alisievich.reader.repository.ReaderRepository;
+import com.alisievich.reader.validator.ReaderValidator;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ReaderService extends CrudService<Reader, Integer> {
     private final ReaderRepository readerRepository;
+    private final ReaderValidator readerValidator;
 
-    public ReaderService(ReaderRepository readerRepository){
+    public ReaderService(ReaderRepository readerRepository, ReaderValidator readerValidator){
         super(readerRepository);
+        this.readerValidator = readerValidator;
         this.readerRepository = readerRepository;
     }
 
     public Reader create(ReaderRequestDto requestDto){
-        Reader readerModel = Reader.builder()
+        Reader reader = Reader.builder()
                 .name(requestDto.getName())
                 .address(requestDto.getAddress())
                 .birthday(requestDto.getBirthday())
@@ -26,18 +29,20 @@ public class ReaderService extends CrudService<Reader, Integer> {
                 .registrationDate(requestDto.getRegistrationDate())
                 .phone(requestDto.getPhone())
                 .build();
-        return readerRepository.save(readerModel);
+        readerValidator.validate(reader);
+        return readerRepository.save(reader);
     }
 
     public Reader update(Integer id, ReaderRequestDto requestDto){
-        Reader readerModel = readerRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        readerModel.setName(requestDto.getName());
-        readerModel.setAddress(requestDto.getAddress());
-        readerModel.setBirthday(requestDto.getBirthday());
-        readerModel.setEmail(requestDto.getEmail());
-        readerModel.setCardNumber(requestDto.getCardNumber());
-        readerModel.setRegistrationDate(requestDto.getRegistrationDate());
-        readerModel.setPhone(requestDto.getPhone());
-        return readerRepository.save(readerModel);
+        Reader reader = readerRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        reader.setName(requestDto.getName());
+        reader.setAddress(requestDto.getAddress());
+        reader.setBirthday(requestDto.getBirthday());
+        reader.setEmail(requestDto.getEmail());
+        reader.setCardNumber(requestDto.getCardNumber());
+        reader.setRegistrationDate(requestDto.getRegistrationDate());
+        reader.setPhone(requestDto.getPhone());
+        readerValidator.validate(reader);
+        return readerRepository.save(reader);
     }
 }
