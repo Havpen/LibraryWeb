@@ -1,31 +1,18 @@
 package com.alisievich.javafxapp;
 
-import com.alisievich.javafxapp.config.AppConfig;
-import com.alisievich.javafxapp.config.ConfigLoader;
+import com.alisievich.javafxapp.book.service.BookService;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-
-import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 
 public class HelloController {
     @FXML
     private Label welcomeText;
 
-    private final HttpClient client;
-    private AppConfig config;
+    private final BookService bookService;
 
     public HelloController() {
-        client = HttpClient.newHttpClient();
-
-        try {
-            config = ConfigLoader.loadConfig();
-        } catch (IOException ex) {
-            System.err.println("Failed to load config! Error: " + ex.getMessage());
-        }
+        bookService = new BookService();
     }
 
     @FXML
@@ -35,19 +22,10 @@ public class HelloController {
 
     @FXML
     protected void onLoadBooks() {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(config.getBackend().getUrl() + "books"))
-                .build();
-
-        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(HttpResponse::body)
-                .thenAccept(responseBody -> {
-                    // Update UI or handle response
-                    System.out.println(responseBody);
-                })
-                .exceptionally(e -> {
-                    // Handle exceptions
-                    return null;
+        bookService.getAllBooks()
+                .thenAccept((books) -> {
+                    // Update the Label on the JavaFX Application Thread
+                    Platform.runLater(() -> welcomeText.setText("Books loaded!"));
                 });
     }
 }
