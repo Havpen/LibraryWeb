@@ -1,6 +1,11 @@
 module com.alisievich.javafxapp {
+    exports com.alisievich.javafxapp.genre.dto to com.fasterxml.jackson.databind;
+    exports com.alisievich.javafxapp.publisher.dto to com.fasterxml.jackson.databind;
+    opens com.alisievich.javafxapp.publisher.dto to com.fasterxml.jackson.databind;
+
     requires javafx.controls;
     requires javafx.fxml;
+
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
@@ -17,4 +22,18 @@ module com.alisievich.javafxapp {
     exports com.alisievich.javafxapp.book.mapper;
     exports com.alisievich.javafxapp.book.model;
     exports com.alisievich.javafxapp.book.dto;
+    exports com.alisievich.javafxapp.author.dto;
+    exports com.alisievich.javafxapp.author.mapper;
+    exports com.alisievich.javafxapp.author.model;
+    exports com.alisievich.javafxapp.author.service;
+    exports com.alisievich.javafxapp.publisher.mapper;
+    exports com.alisievich.javafxapp.publisher.model;
+    exports com.alisievich.javafxapp.publisher.service;
+    exports com.alisievich.javafxapp.genre.mapper;
+    exports com.alisievich.javafxapp.genre.model;
+    exports com.alisievich.javafxapp.genre.service;
+    exports com.alisievich.javafxapp.reader.dto;
+    exports com.alisievich.javafxapp.reader.model;
+    exports com.alisievich.javafxapp.reader.service;
+    exports com.alisievich.javafxapp.reader.mapper;
 }

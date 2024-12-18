@@ -4,7 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c8d69bed-7c4f-4636-9b46-af5bd00fe830" name="Changes" comment="" />
+    <list default="true" id="c8d69bed-7c4f-4636-9b46-af5bd00fe830" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../backend-app/src/main/java/com/alisievich/book/repository/BookAuthorRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alisievich/javafxapp/book/dto/BookAuthorResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/alisievich/javafxapp/book/dto/BookIdDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend-app/src/main/java/com/alisievich/book/model/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend-app/src/main/java/com/alisievich/book/model/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend-app/src/main/java/com/alisievich/book/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend-app/src/main/java/com/alisievich/book/service/BookService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend-app/components.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend-app/components.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alisievich/javafxapp/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alisievich/javafxapp/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alisievich/javafxapp/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alisievich/javafxapp/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alisievich/javafxapp/book/dto/BookRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alisievich/javafxapp/book/dto/BookRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alisievich/javafxapp/book/dto/BookResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alisievich/javafxapp/book/dto/BookResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alisievich/javafxapp/book/mapper/BookMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alisievich/javafxapp/book/mapper/BookMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alisievich/javafxapp/book/model/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alisievich/javafxapp/book/model/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alisievich/javafxapp/book/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alisievich/javafxapp/book/service/BookService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/alisievich/javafxapp/client/BackendClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/alisievich/javafxapp/client/BackendClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,21 +33,37 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2pz79xd5h5lVT14W0DNs8DHEptD" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Gradle.Build javafx-app.executor": "Run",
     "Gradle.javafx-app [:com.alisievich.javafxapp.HelloApplication.main()].executor": "Run",
+    "Gradle.javafx-app [:com.alisievich.javafxapp.LibraryManagementApp.main()].executor": "Debug",
     "Gradle.javafx-app [run].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -40,7 +74,20 @@
     "project.structure.side.proportion": "0.2"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Gradle.javafx-app [run]">
+    <configuration name="LibraryManagementApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.alisievich.javafxapp.LibraryManagementApp" />
+      <module name="javafx-app.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.alisievich.javafxapp.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="javafx-app [run]" type="GradleRunConfiguration" factoryName="Gradle" nameIsGenerated="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -63,6 +110,15 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Application.LibraryManagementApp" />
+      <item itemvalue="Gradle.javafx-app [run]" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.LibraryManagementApp" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
