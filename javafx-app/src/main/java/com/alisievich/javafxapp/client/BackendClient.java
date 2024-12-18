@@ -5,13 +5,13 @@ import com.alisievich.javafxapp.config.ConfigLoader;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.net.http.HttpHeaders;
 import java.util.concurrent.CompletableFuture;
 
 public class BackendClient {
@@ -32,7 +32,7 @@ public class BackendClient {
         client = HttpClient.newHttpClient();
         objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
+        objectMapper.registerModule(new JavaTimeModule());
 
         try {
             config = ConfigLoader.loadConfig();

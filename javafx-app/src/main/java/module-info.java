@@ -15,6 +15,7 @@ module com.alisievich.javafxapp {
     requires com.fasterxml.jackson.dataformat.yaml;
     requires static lombok;
     requires org.mapstruct;
+    requires com.fasterxml.jackson.datatype.jsr310;
 
     opens com.alisievich.javafxapp to javafx.fxml;
     exports com.alisievich.javafxapp;
