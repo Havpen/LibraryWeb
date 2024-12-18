@@ -353,13 +353,13 @@ public class LibraryManagementApp extends Application {
         Button deleteAuthorButton = new Button("Удалить");
 
         addAuthorButton.setOnAction(e -> {
-            showAuthorForm(null, authorData);
+            showAuthorForm(null, authorData, authorsTable);
             authorsTable.refresh();
         });
         editAuthorButton.setOnAction(e -> {
             Author selectedAuthor = authorsTable.getSelectionModel().getSelectedItem();
             if (selectedAuthor != null) {
-                showAuthorForm(selectedAuthor, authorData);
+                showAuthorForm(selectedAuthor, authorData, authorsTable);
                 authorsTable.refresh();
             } else {
                 showAlert("Ошибка", "Выберите автора для редактирования.");
@@ -385,7 +385,7 @@ public class LibraryManagementApp extends Application {
 
     }
 
-    private void showAuthorForm(Author author, ObservableList<Author> authorData) {
+    private void showAuthorForm(Author author, ObservableList<Author> authorData, TableView<Author> authorTableView) {
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.setTitle(author == null ? "Добавить автора" : "Редактировать автора");
@@ -411,14 +411,20 @@ public class LibraryManagementApp extends Application {
 
             AuthorRequestDto authorRequestDto = new AuthorRequestDto(null, name);
             if (author == null) {
-                authorService.createAuthor(authorRequestDto);
-
+                authorService.createAuthor(authorRequestDto)
+                        .thenAccept(savedAuthor -> {
+                            authorData.setAll(authorService.getAllAuthors().join());
+                            authorTableView.refresh();
+                        });
             } else {
                 authorRequestDto.setId(author.getId());
-                authorService.updateAuthor(author.getId(), authorRequestDto);
+                authorService.updateAuthor(author.getId(), authorRequestDto)
+                        .thenAccept(savedAuthor -> {
+                            authorData.setAll(authorService.getAllAuthors().join());
+                            authorTableView.refresh();
+                        });
             }
 
-            authorData.setAll(authorService.getAllAuthors().join());
             dialog.close();
         });
 
