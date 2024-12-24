@@ -1,7 +1,6 @@
 package com.alisievich.javafxapp.reader.dto;
 
 import lombok.*;
-
 import java.time.LocalDate;
 
 @Getter

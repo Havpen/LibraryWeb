@@ -3,7 +3,6 @@ package com.alisievich.author.validator;
 import com.alisievich.author.model.Author;
 import com.alisievich.exception.GenericErrorException;
 import org.springframework.stereotype.Component;
-
 import java.util.regex.Pattern;
 
 @Component

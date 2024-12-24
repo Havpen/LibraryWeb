@@ -37,4 +37,16 @@ module com.alisievich.javafxapp {
     exports com.alisievich.javafxapp.reader.model;
     exports com.alisievich.javafxapp.reader.service;
     exports com.alisievich.javafxapp.reader.mapper;
+    exports com.alisievich.javafxapp.reservation.mapper;
+    exports com.alisievich.javafxapp.reservation.dto;
+    exports com.alisievich.javafxapp.reservation.service;
+    exports com.alisievich.javafxapp.reservation.model;
+    exports com.alisievich.javafxapp.issue.dto;
+    exports com.alisievich.javafxapp.issue.model;
+    exports com.alisievich.javafxapp.issue.service;
+    exports com.alisievich.javafxapp.issue.mapper;
+    exports com.alisievich.javafxapp.book.book_instance.model;
+    exports com.alisievich.javafxapp.book.book_instance.dto;
+    exports com.alisievich.javafxapp.book.book_instance.mapper;
+    exports com.alisievich.javafxapp.book.book_instance.service;
 }

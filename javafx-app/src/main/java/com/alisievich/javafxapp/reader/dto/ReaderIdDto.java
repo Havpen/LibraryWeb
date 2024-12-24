@@ -1,12 +1,12 @@
-package com.alisievich.javafxapp.genre.dto;
+package com.alisievich.javafxapp.reader.dto;
 
 import lombok.*;
 
-@Setter
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GenreIdDto {
+public class ReaderIdDto {
     private Integer id;
 }

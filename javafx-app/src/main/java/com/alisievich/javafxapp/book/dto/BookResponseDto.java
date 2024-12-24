@@ -3,7 +3,6 @@ package com.alisievich.javafxapp.book.dto;
 import com.alisievich.javafxapp.genre.dto.GenreResponseDto;
 import com.alisievich.javafxapp.publisher.dto.PublisherResponseDto;
 import lombok.*;
-
 import java.util.List;
 
 @Getter

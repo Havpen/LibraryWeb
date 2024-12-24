@@ -12,14 +12,11 @@ import org.springframework.stereotype.Service;
 public class AuthorService extends CrudService<Author, Integer> {
     private final AuthorRepository authorRepository;
     private final AuthorValidator authorValidator;
-
     public AuthorService(AuthorRepository authorRepository, AuthorValidator authorValidator) {
         super(authorRepository);
-
         this.authorRepository = authorRepository;
         this.authorValidator = authorValidator;
     }
-
     public Author create(AuthorRequestDto requestDto) {
         Author author = Author.builder()
                 .name(requestDto.getName())
@@ -27,7 +24,6 @@ public class AuthorService extends CrudService<Author, Integer> {
         authorValidator.validate(author);
         return save(author);
     }
-
     public Author update(Integer id, AuthorRequestDto requestDto) {
         Author author = authorRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         author.setName(requestDto.getName());

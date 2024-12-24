@@ -5,6 +5,7 @@ import com.alisievich.reservation.model.Reservation;
 import org.springframework.stereotype.Component;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 @Component
@@ -17,13 +18,14 @@ public class ReservationValidator {
         if(reservation.getReservationDate() == null || !Pattern.matches(regexDate, reservationString)){
             throw new GenericErrorException("Поле должно быть в формате dd.MM.yyyy.");
         }
+
         String reservationDeadLineString = reservation.getReservationDeadLine().format(formatter);
         if(reservation.getReservationDeadLine() == null || !Pattern.matches(regexDate, reservationDeadLineString)){
             throw new GenericErrorException("Поле должно быть в формате dd.MM.yyyy.");
         }
-        String regexStatus = "^[а-яА-ЯёЁ\\s]+$";
-        if(reservation.getStatus() == null || !Pattern.matches(regexStatus, reservation.getStatus())){
-            throw new GenericErrorException("Поле должно содержать только русские буквы и пробелы");
+
+        if (!(Objects.equals(reservation.getStatus(), "CONFIRMED") || Objects.equals(reservation.getStatus(), "CANCELLED"))) {
+            throw new GenericErrorException("Статус должен быть CONFIRMED или CANCELLED!");
         }
     }
 }

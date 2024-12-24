@@ -1,4 +1,4 @@
-package com.alisievich.javafxapp.genre.dto;
+package com.alisievich.javafxapp.book.book_instance.dto;
 
 import lombok.*;
 
@@ -7,6 +7,6 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GenreIdDto {
+public class BookInstanceIdDto {
     private Integer id;
 }

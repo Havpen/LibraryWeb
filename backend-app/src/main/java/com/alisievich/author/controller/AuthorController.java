@@ -9,7 +9,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -18,26 +17,22 @@ import java.util.List;
 public class AuthorController {
     private final AuthorService authorService;
     private final AuthorMapper responseMapper;
-
     @Operation(summary = "Get all authors")
     @GetMapping
     public ResponseEntity<List<AuthorResponseDto>> getAll() {
         return ResponseEntity.ok(authorService.getAll().stream().map(responseMapper::map).toList());
     }
-
     @Operation(summary = "Get author")
     @GetMapping("/{id}")
     public ResponseEntity<AuthorResponseDto> getById(@PathVariable Integer id) {
         return ResponseEntity.ok(responseMapper.map(authorService.getById(id)));
     }
-
     @Operation(summary = "Add author")
     @PostMapping
     public ResponseEntity<AuthorResponseDto> create(@RequestBody AuthorRequestDto authorRequestDto) {
         Author author = authorService.create(authorRequestDto);
         return ResponseEntity.ok(responseMapper.map(author));
     }
-
     @Operation(summary = "Update author")
     @PutMapping("/{id}")
     public ResponseEntity<AuthorResponseDto> update(@PathVariable Integer id,
@@ -45,7 +40,6 @@ public class AuthorController {
         Author author = authorService.update(id, authorRequestDto);
         return ResponseEntity.ok(responseMapper.map(author));
     }
-
     @Operation(summary = "Delete author")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id) {

@@ -1,7 +1,6 @@
 package com.alisievich.javafxapp.reader.model;
 
 import lombok.*;
-
 import java.time.LocalDate;
 
 @Setter
@@ -18,4 +17,8 @@ public class Reader {
     private String email;
     private LocalDate registrationDate;
     private Integer cardNumber;
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

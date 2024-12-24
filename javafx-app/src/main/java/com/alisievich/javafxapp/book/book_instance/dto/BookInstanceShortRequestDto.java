@@ -1,15 +1,15 @@
 package com.alisievich.javafxapp.book.book_instance.dto;
 
-import com.alisievich.javafxapp.book.dto.BookRequestDto;
+import com.alisievich.javafxapp.book.dto.BookIdDto;
 import lombok.*;
 
-@Getter
 @Setter
+@Getter
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class BookInstanceRequestDto {
+@AllArgsConstructor
+public class BookInstanceShortRequestDto {
     private Integer id;
-    private BookRequestDto book;
+    private BookIdDto book;
     private String barcode;
 }

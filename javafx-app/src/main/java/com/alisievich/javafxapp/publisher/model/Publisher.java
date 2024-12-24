@@ -11,4 +11,8 @@ public class Publisher {
     private Integer id;
     private String name;
     private String address;
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

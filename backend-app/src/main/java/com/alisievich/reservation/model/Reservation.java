@@ -2,6 +2,7 @@ package com.alisievich.reservation.model;
 
 
 import com.alisievich.book.book_instance.model.BookInstance;
+import com.alisievich.reader.model.Reader;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -21,6 +22,11 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "reader_id")
+    private Reader reader;
 
     @NotNull
     @Column(name = "reservation_date")

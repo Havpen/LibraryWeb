@@ -1,11 +1,13 @@
 package com.alisievich.javafxapp.client;
 
+import com.alisievich.javafxapp.LibraryManagementApp;
 import com.alisievich.javafxapp.config.AppConfig;
 import com.alisievich.javafxapp.config.ConfigLoader;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import javafx.application.Platform;
 
 import java.io.IOException;
 import java.net.URI;
@@ -48,7 +50,13 @@ public class BackendClient {
                 .build();
 
         client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(HttpResponse::body)
+                .thenApply(response -> {
+                    if (response.statusCode() != 200) {
+                        future.completeExceptionally(new RuntimeException(response.body()));
+                    }
+
+                    return response.body();
+                })
                 .thenAccept(responseBody -> {
                     try {
                         future.complete(objectMapper.readValue(responseBody, clazz));
@@ -79,7 +87,16 @@ public class BackendClient {
                 .build();
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(response -> parseJson(response.body(), responseType)); // десериализация ответа
+                .thenApply(response -> {
+                    if (response.statusCode() != 200) {
+                        Platform.runLater(() -> {
+                            LibraryManagementApp.showAlert("Ошибка сохранения", response.body());
+                        });
+                        throw new RuntimeException(response.body());
+                    }
+
+                    return parseJson(response.body(), responseType);
+                }); // десериализация ответа
     }
 
     public <TRequest, TResponse> CompletableFuture<TResponse> update(String url, TRequest requestBody, Class<TResponse> responseType) {
@@ -90,7 +107,16 @@ public class BackendClient {
                 .build();
 
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(response -> parseJson(response.body(), responseType)); // десериализация ответа
+                .thenApply(response -> {
+                    if (response.statusCode() != 200) {
+                        Platform.runLater(() -> {
+                            LibraryManagementApp.showAlert("Ошибка обновления", response.body());
+                        });
+                        throw new RuntimeException(response.body());
+                    }
+
+                    return parseJson(response.body(), responseType);
+                }); // десериализация ответа
     }
 
     private String toJson(Object obj) {

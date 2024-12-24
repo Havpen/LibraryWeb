@@ -1,6 +1,7 @@
 package com.alisievich.reservation.dto;
 
 import com.alisievich.book.book_instance.dto.BookInstanceResponseDto;
+import com.alisievich.reader.dto.ReaderResponseDto;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 @Builder
 public class ReservationResponseDto {
     private Integer id;
+    private ReaderResponseDto reader;
     private LocalDate reservationDate;
     private LocalDate reservationDeadLine;
     private String status;
